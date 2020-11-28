@@ -4,6 +4,11 @@ const mongoose = require('mongoose');
 
 require('dotenv').config();
 
+// Import routes
+const authRoute = requier('./routes/auth')
+
+
+
 const app = express();
 const port = process.env.PORT || 5000;
 
