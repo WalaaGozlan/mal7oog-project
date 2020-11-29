@@ -13,7 +13,6 @@ const {error} = registeValidation(req.body)
 if(error) return res.status(400).send(error.details[0].message);
 
 
-
 //save function
     const user = new User ({ 
         password: req.body.password,
