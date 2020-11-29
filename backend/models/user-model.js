@@ -1,7 +1,4 @@
 
-
-/// Here is my user model schema
-
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema ({
@@ -18,7 +15,7 @@ const userSchema = new mongoose.Schema ({
         max: 255,
         min: 6
     },
-    Password: {
+    password: {
         type: String,
         required: true,
         max: 1000,
@@ -26,8 +23,9 @@ const userSchema = new mongoose.Schema ({
     },
     date: {
         type: Date,
-        defaulte: Date.now
+        default: Date.now
     }
+   
 });
 
-module.exports = mongoose.model('User',userSchema);
+module.exports = mongoose.model('User',userSchema );
