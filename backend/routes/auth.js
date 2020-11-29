@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const User = require('../models/user-model.js')
 const {registeValidation} = require('../validation.js');
+const bcrypt = require('bcryptjs');
 // const {loginValidation} = require('../validation')
 
 
@@ -16,10 +17,18 @@ if(error) return res.status(400).send(error.details[0].message);
 const emailExist = await User.findOne({email: req.body.email});
 if (emailExist) return res.status(400).send('Email already Exists');
 
+//hashing the password 
+const salt = await bcrypt.genSalt(10);
+const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+
+
+
+
 //save function
 // create a new user 
     const user = new User ({ 
-        password: req.body.password,
+        password: hashedPassword,
         name: req.body.name,
         email: req.body.email
     });
@@ -28,12 +37,16 @@ if (emailExist) return res.status(400).send('Email already Exists');
 
     try{
         const savedUser = await user.save();
-        // console.log("ttt")
-        res.send(savedUser); 
+        res.send({user : user._id}); 
     }catch(err){ 
         res.status(400).send(err);
     }
     
 });
+
+
+
+
+
 
 module.exports = router ;
