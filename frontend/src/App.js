@@ -1,15 +1,14 @@
-// import React from 'react';
-// import Loginbutton from './components/loginbutton';
-// import LogoutButton from './components/logoutButton'
+import React from 'react';
+import { BrowserRouter as Router, Route } from  "react-router-dom";
 
-// function App() {
-//   return (
-//     <>
-//    <Loginbutton/>
+import signin from "./components/signin.component"
 
-//    <LogoutButton/>
-//    </>
-//   );
-// }
+function App() {
+  return (
+    <Router>
+        <Route path = "/register" component = { signin }/>
+    </Router>
+  );
+}
 
-// export default App;
+export default App;
