@@ -19,7 +19,6 @@ if(error) return res.status(400).send(error.details[0].message);
         password: req.body.password,
         name: req.body.name,
         email: req.body.email
-
     });
 
     try{
