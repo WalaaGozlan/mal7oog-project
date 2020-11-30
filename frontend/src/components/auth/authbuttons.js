@@ -1,5 +1,6 @@
 // authentication buttons Login & Logout 
-// we can here use Link but insatde of that we are going with using a gunction in react dom "UseHistory"
+// we can here use Link but insatde of that "UseHistory" function can do this work better
+// what is useHistory ? The useHistory hook gives you access to the history instance that you may use to navigate.
 import React from 'react'
 import { useHistory } from "react-router-dom" ;
 
