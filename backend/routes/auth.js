@@ -21,6 +21,9 @@ if (emailExist) return res.status(400).send('Email already Exists');
 //hashing the password 
 const salt = await bcrypt.genSalt(10);
 const hashedPassword = await bcrypt.hash(req.body.password, salt);
+console.log(salt)
+
+
 
 
 
@@ -62,6 +65,7 @@ if(!validPass) return res.status(400).send('Invalid Password');
 //create and assign a TOKEN
 const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET );
 res.header('auth-tokennnn', token).send(token);
+console.log(token)
 
 // res.send('Logged In!')
 });
