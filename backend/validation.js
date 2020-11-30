@@ -32,7 +32,7 @@ const loginValidation = (data) =>{
     .required()
 };
 return Joi.validate(data, schema);
-}
+};
 
 module.exports.registeValidation = registeValidation;
 module.exports.loginValidation = loginValidation;
