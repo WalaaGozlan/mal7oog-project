@@ -7,9 +7,9 @@ const mongoose = require('mongoose');
 
 // Import routes
 const authRoute = require('./routes/auth.js');
+const postRoute = require('./routes/posts.js')
 
 dotenv.config();
-
 
 
 const port = process.env.PORT || 1300;
@@ -19,6 +19,9 @@ app.use(cors());
 app.use(express.json());
 // Route Middlewares
 app.use('/api/user', authRoute);
+app.use('/api/posts', postRoute);
+
+
 
 // connect to DB
 const uri = process.env.ATLAS_URI;
