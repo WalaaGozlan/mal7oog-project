@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require('express'); 
 const app = express();
 const dotenv = require('dotenv')
 const cors = require('cors');
@@ -17,7 +17,7 @@ const port = process.env.PORT || 1300;
 // // middleware  // '/api/user' ===> this authRoute will have a prefix
 app.use(cors());
 app.use(express.json());
-// Route Middlewares
+// Route Middlewares// setup routes
 app.use('/api/user', authRoute);
 app.use('/api/posts', postRoute);
 
