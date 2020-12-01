@@ -85,6 +85,33 @@ router.delete("/delete",verifyToken, async (req, res) => {
   });
 
 
+//endpoint
+// this will not be a private  
+  router.post("/tokenIsValid", async (req, res) => {
+    try {
+      const token = req.header("x-auth-token");
+      if (!token) return res.send(false);
+  
+      const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+      if (!verified) return res.send(false);
+  
+      const user = await User.findById(verified._id);
+      if (!user) return res.send(false);
+  
+      return res.send(true);
+    } catch (err) {
+      res.status(500).send({ error: err.message });
+    }
+  });
+  
+//   router.get("/", auth, async (req, res) => {
+//     const user = await User.findById(req.user);
+//     res.send({
+//       displayName: user.displayName,
+//       id: user._id,
+//     });
+//   });
+
 
 
 
