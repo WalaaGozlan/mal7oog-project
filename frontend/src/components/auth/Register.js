@@ -7,8 +7,6 @@ export default function Register() {
     const [name, setName] = useState();
 
     return (
-        
-
         <div>
            <h2>Register</h2> 
            <form>
