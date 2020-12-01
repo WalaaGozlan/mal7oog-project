@@ -1,43 +1,42 @@
-//VALIDATION 
-const Joi= require('@hapi/joi'); // import hapi Joi
+//validation
+const Joi = require('@hapi/joi')
+
+//registe validation 
+const registeValidation = (data) =>{
+    const schema ={
+    name: Joi.string()
+    .min(6)
+    .required(),
+    email:  Joi.string()
+    .min(6)
+    .required()
+    .email(),
+    password: Joi.string()
+    .min(6)
+    .required(),
+    passwordCheck: Joi.string()
+    .min(6)
+    .required()
+    
+};
+return Joi.validate(data, schema);
+}
 
 
-// A new schema 
-// A function that allow us to choose wich schema we want to use .
 
-// Register Validation 
-const registerValidation = data => {
-        const schema = {
-            name: Joi.string()
-            .min(6)
-            .required(),
-            email: Joi.string()
-            .min(6)
-            .required()
-            .email(),
-            password:Joi.string()
-            .min(6)
-            .required()
-    };
-    return Joi.validate(data, schema); // the validation that will take req.body as a data
+//login validation 
+const loginValidation = (data) =>{
+    const schema ={
+    email:  Joi.string()
+    .min(6)
+    .required()
+    .email(),
+    password: Joi.string()
+    .min(6)
+    .required()
+};
+return Joi.validate(data, schema);
 };
 
-// Login Validation 
-const loginValidation = (data) => {
-    const schema = {
-        email: Joi.string()
-        .min(6)
-        .required()
-        .email(),
-        password:Joi.string()
-        .min(6)
-        .required()
-    };
-    return Joi.validate(data, schema); 
-};
-
-
-
-
-module.exports.registerValidation = registerValidation;
+module.exports.registeValidation = registeValidation;
 module.exports.loginValidation = loginValidation;
