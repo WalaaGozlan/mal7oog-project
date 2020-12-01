@@ -3,6 +3,7 @@ const User = require('../models/user-model.js')
 const jwt = require('jsonwebtoken');
 const {registeValidation, loginValidation} = require('../validation.js');
 const bcrypt = require('bcryptjs');
+const verifyToken = require("../deletemiddlwere/middlwere");
 // const {loginValidation} = require('../validation')
 
 
@@ -22,7 +23,7 @@ if (emailExist) return res.status(400).send('An account with this Email already 
 //hashing the password 
 const salt = await bcrypt.genSalt(10);
 const hashedPassword = await bcrypt.hash(req.body.password, salt);
-console.log(salt)
+
 
 if (req.body.password !== req.body.passwordCheck ) return res.status(400).send('Please enter the same password again.');
 
@@ -38,8 +39,8 @@ if (req.body.password !== req.body.passwordCheck ) return res.status(400).send('
     //the code should wait until this request is finished 
     try{
         const savedUser = await user.save();
-        res.send({user : user._id}); 
-        // res.send(savedUser); 
+        // res.send({user : user._id}); 
+        res.send(savedUser); 
     }catch(err){ 
         res.status(400).send(err);
     }
@@ -61,10 +62,27 @@ if(!validPass) return res.status(400).send('Invalid Password');
 
 //create and assign a TOKEN
 const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET );
-res.header('auth-tokennnn', token).send(token);
+res.header('auth-tokennnn', token).send({
+    token:token,
+      user:{
+    id: user._id,
+    name: user.name,
+  },
+});
 console.log(token)
 // res.send('Logged In!')
 });
+
+
+router.delete("/delete",verifyToken, async (req, res) => {
+    // console.log(req.user)
+    try {
+      const deletedUser = await User.findByIdAndDelete(req.user);
+      res.send(deletedUser);
+    } catch (err) {
+      res.status(500).send('error');
+    }
+  });
 
 
 
