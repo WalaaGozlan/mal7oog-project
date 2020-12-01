@@ -1,23 +1,29 @@
-const express = require('express');
+const express = require('express'); 
 const app = express();
+const dotenv = require('dotenv')
 const cors = require('cors');
 const mongoose = require('mongoose');
-require('dotenv').config();
+// require('dotenv').config();
 
 // Import routes
 const authRoute = require('./routes/auth.js');
-const postRoute = require('./routes/posts.js');
+const postRoute = require('./routes/posts.js')
+
+dotenv.config();
+
+
 const port = process.env.PORT || 1300;
 
-// middleware 
+// // middleware  // '/api/user' ===> this authRoute will have a prefix
 app.use(cors());
 app.use(express.json());
-
-// Route Middlewares
+// Route Middlewares// setup routes
 app.use('/api/user', authRoute);
 app.use('/api/posts', postRoute);
 
-//connect to DB
+
+
+// connect to DB
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 );
@@ -28,5 +34,6 @@ connection.once('open', () => {
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on port: ${port}'http://localhost:3000'` )
+    console.log(`Server is running on port: ${port}`);
 });
+
