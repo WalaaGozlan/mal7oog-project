@@ -13,7 +13,11 @@ const registeValidation = (data) =>{
     .email(),
     password: Joi.string()
     .min(6)
+    .required(),
+    passwordCheck: Joi.string()
+    .min(6)
     .required()
+    
 };
 return Joi.validate(data, schema);
 }
