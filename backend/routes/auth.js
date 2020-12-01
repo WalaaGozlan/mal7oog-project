@@ -12,21 +12,19 @@ router.post('/register', async (req,res) => {
 const {error} = registeValidation(req.body);
 // const {error} = Joi.validate(req.body, schema);
 // res.send(error.details[0].message);
+// if !email or !password or !name --> 400 status and senad a message
 if(error) return res.status(400).send(error.details[0].message);
 
 // checking if the user is already in the database 
 const emailExist = await User.findOne({email: req.body.email});
-if (emailExist) return res.status(400).send('Email already Exists');
+if (emailExist) return res.status(400).send('An account with this Email already exists.');
 
 //hashing the password 
 const salt = await bcrypt.genSalt(10);
 const hashedPassword = await bcrypt.hash(req.body.password, salt);
 console.log(salt)
 
-
-
-
-
+if (req.body.password !== req.body.passwordCheck ) return res.status(400).send('Please enter the same password again.');
 
 
 //save function
@@ -37,15 +35,14 @@ console.log(salt)
         email: req.body.email
     });
 
-    //the code should wait until this make request is finished 
-
+    //the code should wait until this request is finished 
     try{
         const savedUser = await user.save();
         res.send({user : user._id}); 
+        // res.send(savedUser); 
     }catch(err){ 
         res.status(400).send(err);
     }
-    
 });
 
 
@@ -57,7 +54,7 @@ const {error} = loginValidation(req.body);
 if(error) return res.status(400).send(error.details[0].message);
 // checking if the email is already exists
 const user = await User.findOne({email: req.body.email});
-if (!user) return res.status(400).send("Email doesn't exist");
+if (!user) return res.status(400).send("No account with this email has been registered");
 // checking if password is correct
 const validPass = await bcrypt.compare(req.body.password, user.password);
 if(!validPass) return res.status(400).send('Invalid Password');
@@ -66,9 +63,10 @@ if(!validPass) return res.status(400).send('Invalid Password');
 const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET );
 res.header('auth-tokennnn', token).send(token);
 console.log(token)
-
 // res.send('Logged In!')
 });
+
+
 
 
 
