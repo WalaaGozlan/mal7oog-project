@@ -13,6 +13,7 @@ export default function Register() {
                <label htmlFor="register-name">Name</label>
                <input id="register-name" type="text" placeholder="Name"/>  
 
+
                <label htmlFor="register-email">Email</label>
                <input id="register-email" type="email" placeholder="Email"/>
 
