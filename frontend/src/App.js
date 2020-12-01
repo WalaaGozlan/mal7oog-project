@@ -1,18 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'; // useEffect its to handel all side effect 
 import Home from "./components/pages/Home";
 import { BrowserRouter , Switch, Route } from  "react-router-dom";
+import axios from "axios"
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Header from "./components/layout/Header";
-import UserContext from "./context/userContext"; // we can store datat in this cotext why do we need it in first place ? it aloow all component in this component to share valuse without using props or statre ? what valuse do we need to share here ? token or the user for auth so we can abdate them easily . 
+import UserContext from "./context/userContext"; // stores the token 
  
-import "./style.css";
+import "./style.css"; 
 
 function App() {
   const [userData, setUserData] = useState({
-    token: undefined,
+    token: undefined,// becouse we need to know if there is token if there is not the token must be undefined
     user: undefined,
   });
+
+  // CHECK IF THERE IS TOKEN IN LOCAL STOREGE OR NOT 
+  useEffect(() => {
+    const checkLoggedIn = async () => {
+      let token = localStorage.getItem("auth-token");
+      if(token === null){
+        localStorage.setItem("auth-token", "");
+        token = "";
+      }
+      const tokenRes = await axios.post(
+        "http://localhost:3000/user/tokenIsValid", 
+        null, 
+        { headers: {"x-auth-token": token} }
+      );
+      // console.log(tokenRes.data)// true or false 
+      // to get the user 
+      if(tokenRes.data){
+        const userRes = await axios.get("http://localhost:3000/users/",{ 
+          headers: {"x-auth-token": token}, 
+        });
+        setUserData({
+          token,
+          user: userRes.data,
+        })
+      }
+    };
+    checkLoggedIn();
+
+  }, []);
+
   return (
       <>
         <BrowserRouter>
