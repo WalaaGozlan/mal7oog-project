@@ -46,14 +46,14 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
-.page {
+/* .page {
   padding: 1rem;
-}
+} */
 
-.container {
+/* .container {
   margin: 0 auto;
   max-width: 900px;
-}
+} */
 
 /* header */
 
@@ -75,7 +75,7 @@ body {
 }
 #header .auth-buttons button {
   padding: 0 1rem;
-  background-color: #724343;
+  background-color: #dad5d5;
   color: #501919;
   font-size: 1.1rem;
 }
