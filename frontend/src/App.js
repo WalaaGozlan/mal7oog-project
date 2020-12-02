@@ -12,7 +12,7 @@ import UserContext from "./context/userContext"; // stores the token
 import "./style.css"; 
 
 function App() {
-  const [userData, setUserData] = useState({
+  const [userData, setUserData] = useState({ //why inside an array?
     token: undefined,// becouse we need to know if there is token if there is not the token must be undefined
     user: undefined,
   });
