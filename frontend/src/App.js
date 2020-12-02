@@ -1,3 +1,6 @@
+// BrowserRouter--> a component that just enabel routing , so anything inside this component has access to the browser
+// Switch--> it will allow us look to the url and making a decisions based on that
+// Route --> determain a single route 
 import React, { useState, useEffect } from 'react'; // useEffect its to handel all side effect 
 import Home from "./components/pages/Home";
 import { BrowserRouter , Switch, Route } from  "react-router-dom";
@@ -6,7 +9,6 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Header from "./components/layout/Header";
 import UserContext from "./context/userContext"; // stores the token 
- 
 import "./style.css"; 
 
 function App() {
@@ -19,19 +21,19 @@ function App() {
   useEffect(() => {
     const checkLoggedIn = async () => {
       let token = localStorage.getItem("auth-token");
-      if(token === null){
+      if(token === null){ // add it to the localS automaticlly
         localStorage.setItem("auth-token", "");
         token = "";
       }
       const tokenRes = await axios.post(
-        "http://localhost:3000/user/tokenIsValid", 
-        null, 
-        { headers: {"x-auth-token": token} }
+        "http://localhost:1300/api/user/tokenIsValid", 
+        null, //the body is null, dont send anything to the body
+        { headers: {"x-auth-token": token}}
       );
-      // console.log(tokenRes.data)// true or false 
+      console.log(tokenRes.data)// true or false 
       // to get the user 
       if(tokenRes.data){
-        const userRes = await axios.get("http://localhost:3000/users/",{ 
+        const userRes = await axios.get("http://localhost:1300/api/user/",{ 
           headers: {"x-auth-token": token}, 
         });
         setUserData({
@@ -42,7 +44,7 @@ function App() {
     };
     checkLoggedIn();
 
-  }, []);
+  }, []); // the array is a dependensie list 
 
   return (
       <>

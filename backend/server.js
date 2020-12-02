@@ -30,10 +30,9 @@ mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedT
 
 const connection = mongoose.connection;
 connection.once('open', () => {
-  console.log("MongoDB connection established successfully");
+  console.log("MongoDB database connection established successfully");
 });
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });
-

@@ -45,34 +45,6 @@ if (req.body.password !== req.body.passwordCheck ) return res.status(400).send('
         res.status(400).send(err);
     }
 });
-  
-
-//login
-
-router.post('/login', async (req,res)=>{
-// let's validate the data before we make a user 
-const {error} = loginValidation(req.body);
-if(error) return res.status(400).send(error.details[0].message);
-// checking if the email is already exists
-const user = await User.findOne({email: req.body.email});
-if (!user) return res.status(400).send("Email doesn't exist");
-// checking if password is correct
-const validPass = await bcrypt.compare(req.body.password, user.password);
-if(!validPass) return res.status(400).send('Invalid Password');
-
-//create and assign a TOKEN
-const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET );
-res.header('auth-tokennnn', token).send(token);
-
-// res.send('Logged In!') 
-});
-
-//Token Authorization in 4 Easy Steps
-// Request: The person asks for access to a server or protected resource. That could involve a login with a password, or it could involve some other process you specify.
-// Verification: The server determines that the person should have access. That could involve checking the password against the username, or it could involve another process you specify.
-// Tokens: The server communicates with the authentication device, like a ring, key, phone, or similar device. After verification, the server issues a token and passes it to the user.
-// Storage: The token sits within the user's browser while work continues.
-
 
 
 //login
@@ -118,6 +90,7 @@ router.delete("/delete",verifyToken, async (req, res) => {
   router.post("/tokenIsValid", async (req, res) => {
     try {
       const token = req.header("x-auth-token");
+      console.log(token, 'faded')
       if (!token) return res.send(false);
   
       const verified = jwt.verify(token, process.env.TOKEN_SECRET);
@@ -132,13 +105,14 @@ router.delete("/delete",verifyToken, async (req, res) => {
     }
   });
   
-//   router.get("/", auth, async (req, res) => {
-//     const user = await User.findById(req.user);
-//     res.send({
-//       displayName: user.displayName,
-//       id: user._id,
-//     });
-//   });
+  router.get("/", verifyToken, async (req, res) => {
+    const user = await User.findById(req.user);
+    // res.send(user)
+    res.send({
+      name: user.name,
+      id: user._id,
+    });
+  });
 
 
 
