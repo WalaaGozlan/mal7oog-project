@@ -90,6 +90,7 @@ router.delete("/delete",verifyToken, async (req, res) => {
   router.post("/tokenIsValid", async (req, res) => {
     try {
       const token = req.header("x-auth-token");
+      console.log(token, 'faded')
       if (!token) return res.send(false);
   
       const verified = jwt.verify(token, process.env.TOKEN_SECRET);
@@ -104,13 +105,14 @@ router.delete("/delete",verifyToken, async (req, res) => {
     }
   });
   
-//   router.get("/", auth, async (req, res) => {
-//     const user = await User.findById(req.user);
-//     res.send({
-//       displayName: user.displayName,
-//       id: user._id,
-//     });
-//   });
+  router.get("/", verifyToken, async (req, res) => {
+    const user = await User.findById(req.user);
+    // res.send(user)
+    res.send({
+      name: user.name,
+      id: user._id,
+    });
+  });
 
 
 
