@@ -30,7 +30,7 @@ function App() {
         null, //the body is null, dont send anything to the body
         { headers: {"x-auth-token": token}}
       );
-      console.log(tokenRes.data)// true or false 
+      // console.log(tokenRes.data)// true or false 
       // to get the user 
       if(tokenRes.data){
         const userRes = await axios.get("http://localhost:1300/api/user/",{ 
