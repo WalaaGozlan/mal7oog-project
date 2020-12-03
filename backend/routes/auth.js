@@ -24,12 +24,13 @@ if (emailExist) return res.status(400).send({msg:'An account with this Email alr
 const salt = await bcrypt.genSalt(10);
 const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
+// if (req.body.name.min >= 6) return res.status(400).send({msg:'Please add more char to ur name'});
 
 if (req.body.password !== req.body.passwordCheck ) return res.status(400).send({msg:'Please enter the same password again.'});
 
 
 
-//save function
+
 // create a new user 
     const user = new User ({ 
         password: hashedPassword,
@@ -38,6 +39,7 @@ if (req.body.password !== req.body.passwordCheck ) return res.status(400).send({
     });
 
     //the code should wait until this request is finished 
+    //save function
     try{
         const savedUser = await user.save();
         // res.send({user : user._id}); 
@@ -53,7 +55,7 @@ if (req.body.password !== req.body.passwordCheck ) return res.status(400).send({
 router.post('/login', async (req,res)=>{
 // let's validate the data before we make a user 
 const {error} = loginValidation(req.body);
-if(error) return res.status(400).send(error.details[0].message);
+if(error) return res.status(400).send({ msg: "Not all fields have been entered." });
 // checking if the email is already exists
 const user = await User.findOne({email: req.body.email});
 if (!user) return res.status(400).send({msg:"No account with this email has been registered"});
