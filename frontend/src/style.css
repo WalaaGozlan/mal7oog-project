@@ -130,7 +130,7 @@ body {
 
 /* error notice */
 
-/* .error-notice {
+.error-notice {
   margin: 1rem 0;
   padding: 0.5rem;
   border: 1px solid #e07c7c;
@@ -139,14 +139,14 @@ body {
   justify-content: space-between;
   align-items: center;
   background-color: #f8d6d6;
-} */
-/* .error-notice button {
+}
+.error-notice button {
   width: 20px;
   height: 20px;
   border-radius: 50%;
   background-color: #df4343;
   color: #ffffff;
-} */
+}
 
 /* media queries */
 /* 
