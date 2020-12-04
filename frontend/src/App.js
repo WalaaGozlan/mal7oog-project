@@ -8,8 +8,9 @@ import axios from "axios"
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Header from "./components/layout/Header";
+import calender from "./components/calender.component";
 import UserContext from "./context/userContext"; // stores the token 
-import "./style.css"; 
+// import "./style.css"; 
 
 function App() {
   const [userData, setUserData] = useState({ //why inside an array?
@@ -55,6 +56,7 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
+            <Route path="/calender" exact component={calender} />
           </Switch>
           </UserContext.Provider>
         </BrowserRouter>
