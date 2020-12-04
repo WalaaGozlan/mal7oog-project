@@ -3,12 +3,16 @@
 // Route --> determain a single route 
 import React, { useState, useEffect } from 'react'; // useEffect its to handel all side effect 
 import Home from "./components/pages/Home";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter , Switch, Route } from  "react-router-dom";
 import axios from "axios"
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Header from "./components/layout/Header";
+import Navbar from "./components/navbar.component";
 import calender from "./components/calender.component";
+import CreateTask from "./components/create-material.component";
+import EditTask from "./components/edit.component";
 import UserContext from "./context/userContext"; // stores the token 
 // import "./style.css"; 
 
@@ -52,11 +56,15 @@ function App() {
         <BrowserRouter>
          <UserContext.Provider value={{ userData, setUserData}}>
           <Header />
+              <Navbar/>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/calender" exact component={calender} />
+            <Route path="/add" component={CreateTask} /> 
+            {/* create */}
+            <Route path="/edit/:id" component={EditTask} />
           </Switch>
           </UserContext.Provider>
         </BrowserRouter>

@@ -24,7 +24,7 @@ export default class calender extends Component {
      };
   }
   componentDidMount() {
-    axios.get('http://localhost:1300/api/user/materials/')
+    axios.get('http://localhost:1300/api/materials/')
       .then(response => {
         this.setState({
           tasks: response.data,
@@ -37,7 +37,7 @@ export default class calender extends Component {
   }
 
   deleteTask(id) {
-    axios.delete('http://localhost:1300/api/user/materials/'+id)
+    axios.delete('http://localhost:1300/api/materials/'+id)
       .then(response => { console.log(response.data)});
 
       //use filter to render elements except the deleted item 

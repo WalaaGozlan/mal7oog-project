@@ -28,7 +28,7 @@ export default function Login() {
         user: loginRes.data.user,
       });
       localStorage.setItem("auth-token", loginRes.data.token);
-      history.push("/") //Q
+      history.push("/add") //Q // create
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
       console.log(err.response.data.msg)
