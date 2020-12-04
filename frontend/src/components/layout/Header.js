@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { Link } from "react-router-dom" ;
-import Authbuttons from "../auth/Authbuttons.js"
+// import Authbuttons from "../auth/Authbuttons.js"
 
 export default function Header() {
     return (
@@ -9,7 +9,7 @@ export default function Header() {
           <Link  to='/'>
               <h1 className="titel"> Mal7ooG </h1>
           </Link>
-          <Authbuttons/>
+          {/* <Authbuttons/> */}
         </header>
     );
 }
