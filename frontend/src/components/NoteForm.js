@@ -42,7 +42,7 @@ function NoteForm(props){
             className='note-input'
             ref={inputRef}
           />
-          <button onClick={handleSubmit} className='note-button' class="btn btn-outline-info">
+          <button onClick={handleSubmit} className ='note-button btn btn-outline-info'>
             Add note
           </button>
         </>
