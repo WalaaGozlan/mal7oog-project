@@ -14,7 +14,7 @@ export default class EditTask extends Component {
     }
   }
   componentDidMount() {
-    axios.get('http://localhost:1300/api/materials'+this.props.match.params.id)
+    axios.get('http://localhost:1300/api/materials/'+this.props.match.params.id)
       .then(response => {
         this.setState({
           material: response.data.material,
@@ -41,7 +41,6 @@ export default class EditTask extends Component {
       duration: e.target.value
     })
   } 
-  
   onSubmit(e) {
     e.preventDefault();
     const task = {
@@ -54,7 +53,6 @@ export default class EditTask extends Component {
     axios.post('http://localhost:1300/api/materials/update/'+this.props.match.params.id, task)
    // console.log(this.props.params.id)
       .then( res => console.log(res.data))
-  
   .catch(function (error) {
     console.log(error);
   });
@@ -64,11 +62,11 @@ window.location = "/calender"
   render() {
     return (
     <div>
-      <h3>Edit Your Task</h3>
+      <h3 className="font-weight-bold deep-purple-text" style={{fontFamily:"Courier"}}>Edit Your Task</h3>
       <form onSubmit={this.onSubmit}>
         <div className="form-group">
-          <label>Material: </label>
-          <input placeholder="choose subject"
+          <label  className="deep-purple-text" style={{fontFamily:"Courier"}}>Material: </label>
+          <input style={{fontFamily:"Courier"}} placeholder="choose subject"
               type="text"
               required
               className="form-control"
@@ -77,8 +75,8 @@ window.location = "/calender"
               />
         </div>
         <div className="form-group">
-          <label>Description: </label>
-          <input placeholder="your plan to this material"
+          <label  className="deep-purple-text" style={{fontFamily:"Courier"}}>Description: </label>
+          <input style={{fontFamily:"Courier"}} placeholder="your plan to this material"
               type="text"
               required
               className="form-control"
@@ -87,8 +85,8 @@ window.location = "/calender"
               />
         </div>
         <div className="form-group">
-          <label>Duration (in minutes): </label>
-          <input placeholder="choose your time wisely"
+          <label  className="deep-purple-text" style={{fontFamily:"Courier"}}>Duration (in minutes): </label>
+          <input style={{fontFamily:"Courier"}} placeholder="choose your time wisely"
               type="text"
               required
               className="form-control"
@@ -97,15 +95,10 @@ window.location = "/calender"
               />
         </div>
         <div className="form-group">
-          <input type="submit" value="EditTask" className="btn btn-primary" />
+          <input type="submit" value="EditTask" className="btn btn-primary btn btn-outline-#4a148c purple darken-4" />
         </div>
       </form>
     </div>
     )
   }
 }
-
-
-
-
-

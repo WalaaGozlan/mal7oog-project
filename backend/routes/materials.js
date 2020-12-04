@@ -27,7 +27,7 @@ router.route('/add').post((req, res) => { //create?
 
 
 router.route('/:id').get((req, res) => {  
-  //console.log(req.params)
+  console.log(req.params)
     Material.findById(req.params.id)    
     .then(material => res.json(material))    
     .catch(err => res.status(400).json('Error: ' + err));
