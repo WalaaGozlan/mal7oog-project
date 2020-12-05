@@ -20,6 +20,7 @@ function NoteForm(props){
         <form onSubmit={handleSubmit} className='note-form'>
       {props.edit ? (
         <>
+         <div className="md-form"></div>
           <input
             placeholder='Update your item'
             value={input}

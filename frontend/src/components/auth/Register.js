@@ -1,9 +1,10 @@
 
-import React, {useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from "react-router-dom";
 import usercontext from "../../context/userContext";
 import axios from "axios";
 import ErrNotice from ".././msg/ErrNotice.js"
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody } from 'mdbreact';
 export default function Register() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -16,8 +17,8 @@ export default function Register() {
 
   const submit = async (e) => {
     e.preventDefault();
-    try{
-      const newUser = {email, password ,passwordCheck, name};
+    try {
+      const newUser = { email, password, passwordCheck, name };
       await axios.post('http://localhost:1300/api/user/register', newUser);
       const loginRes = await axios.post('http://localhost:1300/api/user/login', {
         email,
@@ -28,9 +29,9 @@ export default function Register() {
         user: loginRes.data.user,
       });
       localStorage.setItem("auth-token", loginRes.data.token);
-      history.push("/login");
+      history.push("/add");
     }
-    catch(err){
+    catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
       console.log(err.response.data.msg)
     }
@@ -38,31 +39,64 @@ export default function Register() {
 
 
   return (
-    <div className="page">
-      <h2>Register</h2>
-      {error && <ErrNotice message={error} clearError={()=> setError(undefined)} />}
-      <form onSubmit={submit}>
+    <MDBContainer>
+      <MDBRow>
+        <MDBCol md="6">
+          <MDBCard>
+            <MDBCardBody>
+              <form onSubmit={submit}>
+                <p className="h4 text-center py-4">REGISTER</p>
+                {error && <ErrNotice message={error} clearError={() => setError(undefined)} />}
+                <div className="grey-text">
+                  <MDBInput
+                    label="Your name"
+                    icon="user"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    onChange={e => setName(e.target.value)}
+                  />
+                  <MDBInput
+                    label="Your email"
+                    icon="envelope"
+                    group
+                    type="email"
+                    validate
+                    error="wrong"
+                    success="right"
+                    onChange={e => setEmail(e.target.value)}
+                  />
 
-        <label htmlFor="register-name">Name</label>
-        <input id="register-name" type="text" placeholder="Name"
-          onChange={ e => setName(e.target.value)}
-        />
+                  <MDBInput
+                    label="Your password"
+                    icon="lock"
+                    group
+                    type="password"
+                    validate
+                    onChange={e => setPassword(e.target.value)}
+                  />
+                  <MDBInput
+                    label="Confirm your Password"
+                    icon="lock"
+                    group
+                    type="password"
+                    validate
+                    onChange={e => setPasswordCheck(e.target.value)}
+                  />
 
-
-        <label htmlFor="register-email">Email</label>
-        <input id="register-email" type="email" placeholder="Email"
-  onChange={ e => setEmail(e.target.value)} />
-
-        <label htmlFor="register-password">Password</label>
-        <input id="register-password" type="password" placeholder= "Password"
-          onChange={ e => setPassword(e.target.value)}
-        />
-        <input type="password" placeholder="confirm password"
-          onChange={ e => setPasswordCheck(e.target.value)}
-        />
-        
-        <input type="submit" value="Register"/>
-      </form>
-    </div>
-  )
-}
+                </div>
+                <div className="text-center py-4 mt-3">
+                  <MDBBtn color="cyan" type="submit">
+                    Register
+                  </MDBBtn>
+                </div>
+              </form>
+            </MDBCardBody>
+          </MDBCard>
+        </MDBCol>
+      </MDBRow>
+    </MDBContainer>
+  );
+};

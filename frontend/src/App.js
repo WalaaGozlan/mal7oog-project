@@ -14,6 +14,11 @@ import calender from "./components/calender.component";
 import CreateTask from "./components/create-material.component";
 import EditTask from "./components/edit.component";
 import UserContext from "./context/userContext"; // stores the token 
+import Footer from "./components/layout/footer.js";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
+// import Home from './pages/home.component';
 // import "./style.css"; 
 
 function App() {
@@ -66,6 +71,7 @@ function App() {
             {/* create */}
             <Route path="/edit/:id" component={EditTask} />
           </Switch>
+          <Footer/>
           </UserContext.Provider>
         </BrowserRouter>
       </>

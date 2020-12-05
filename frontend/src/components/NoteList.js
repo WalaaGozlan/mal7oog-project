@@ -32,8 +32,8 @@ function NoteList(){
     };
     return(
         <div>
-           <h1> Write Your Notes </h1>
-           <NoteForm onSubmit ={addNote} />
+             <h1 style={{fontFamily:"Fantasy"}} className="text-info"> Write Your Notes </h1>
+           <NoteForm onSubmit ={addNote}  className="btn btn-outline-info" />
            <Note notes ={notes} completeNote={completeNote} removeNote ={removeNote} updateNote={updateNote}/>
         </div>
     )
