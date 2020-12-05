@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import usercontext from "../../context/userContext";
 import axios from "axios";
 import ErrNotice from ".././msg/ErrNotice.js"
-// import {MDBContainer, MDBRow, MDBCol, MDBInput,MDBBtn } from 'mdbreact';
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 // import 'bootstrap/dist/css/bootstrap.min.css'
 // import '@fortawesome/fontawesome-free/css/all.min.css';
 // import 'bootstrap-css-only/css/bootstrap.min.css';
@@ -37,23 +37,24 @@ export default function Login() {
 
 
   return (
-    <div className="page">
-       <h2>Login</h2> 
-       {error && <ErrNotice message={error} clearError={()=> setError(undefined)} />}
-       <form onSubmit={submit}>
-       
-           <label htmlFor="login-email">Email</label>
-           <input id="login-email" type="email" placeholder="Email"
-             onChange={ e => setEmail(e.target.value)} />
-​
-           <label htmlFor="login-password">Password</label>
-           <input id="login-password" type="password" placeholder= "Password"
-             onChange={ e => setPassword(e.target.value)} 
-           />
-           
-​
-           <input type="submit" value="Login"/>
-       </form>
-    </div>
-)
-}
+    <MDBContainer>
+      <MDBRow>
+        <MDBCol md="6">
+          <form  onSubmit={submit}>
+            <p className="h5 text-center mb-4">LOG-IN</p>
+            {error && <ErrNotice message={error} clearError={()=> setError(undefined)} />}
+            <div className="grey-text">
+              <MDBInput label="Type your email" icon="envelope" group type="email" validate error="wrong"
+                success="right" onChange={ e => setEmail(e.target.value)} />
+              <MDBInput label="Type your password" icon="lock" group type="password" validate onChange={ e => setPassword(e.target.value)} />
+            </div>
+            <div className="text-center">
+              <MDBBtn type="submit" value="Login" >Login</MDBBtn>
+            </div>
+          </form>
+        </MDBCol>
+      </MDBRow>
+    </MDBContainer>
+    );
+    };
+    

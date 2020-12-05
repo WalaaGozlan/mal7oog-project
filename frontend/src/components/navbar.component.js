@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import logo from './logo.svg';
 import { Link } from 'react-router-dom';
 // import Authbuttons from "./Auth/Authbutton";
 export default class Navbar extends Component {
@@ -6,7 +7,7 @@ export default class Navbar extends Component {
     return (
       <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
           {/* <Authbuttons/> */}
-
+        {/* <div><img src={logo} alt="hey" /></div> */}
         <Link to="/" className="navbar-brand">Home</Link>
         <div className="collpase navbar-collapse">
         <ul className="navbar-nav mr-auto">
