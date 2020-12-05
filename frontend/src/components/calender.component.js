@@ -60,14 +60,15 @@ export default class calender extends Component {
       
       <div>
         <div>
-        <h3>Daily Calender</h3>
-        <table className="table">
-          <thead className="thead-light">
+       
+          <h3 className="deep-purple-text" style={{fontFamily:"Courier"}}>Daily Calender</h3>
+        <table className="table table-bordered">
+          <thead>
             <tr>
-              <th>Material</th>
-              <th>Description</th>
-              <th>Duration</th>
-              <th>Actions</th>
+            <th scope="col" className="deep-purple-text h5" style={{fontFamily:"Courier"}}>Material</th>
+              <th scope="col" className="deep-purple-text h5" style={{fontFamily:"Courier"}}>Description</th>
+              <th scope="col" className="deep-purple-text h5" style={{fontFamily:"Courier"}}>Duration</th>
+              <th scope="col" className="deep-purple-text h5" style={{fontFamily:"Courier"}}>Actions</th>
             </tr>
           </thead>
           <tbody>
