@@ -1,12 +1,23 @@
 import React from 'react'
 import img from "../img1.jpg"
+import { MDBMask, MDBView, MDBCol } from "mdbreact";
+
 
 export default function Home() {
+    
     return (
-        <div>
-            <div>
-            <img src={img} alt="home img" hight={1400} width={1524}  />
-        </div>
-        </div>
+        <MDBCol sm="15" >
+        <MDBView hover zoom>
+          <img
+            src={img}
+            className="img-fluid"
+            alt=""
+          />
+          <MDBMask className="flex-center">
+            <p className="white-text">mal7oog</p>
+          </MDBMask>
+        </MDBView>
+      </MDBCol>
     )
+   
 }

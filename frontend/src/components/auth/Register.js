@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import usercontext from "../../context/userContext";
 import axios from "axios";
 import ErrNotice from ".././msg/ErrNotice.js"
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn,MDBCard,MDBCardBody } from 'mdbreact';
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody } from 'mdbreact';
 export default function Register() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -29,7 +29,7 @@ export default function Register() {
         user: loginRes.data.user,
       });
       localStorage.setItem("auth-token", loginRes.data.token);
-      history.push("/login");
+      history.push("/add");
     }
     catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
@@ -45,8 +45,8 @@ export default function Register() {
           <MDBCard>
             <MDBCardBody>
               <form onSubmit={submit}>
-                <p className="h4 text-center py-4">Sign up</p>
-                {error && <ErrNotice message={error} clearError={()=> setError(undefined)} />}
+                <p className="h4 text-center py-4">REGISTER</p>
+                {error && <ErrNotice message={error} clearError={() => setError(undefined)} />}
                 <div className="grey-text">
                   <MDBInput
                     label="Your name"
@@ -68,7 +68,7 @@ export default function Register() {
                     success="right"
                     onChange={e => setEmail(e.target.value)}
                   />
-                
+
                   <MDBInput
                     label="Your password"
                     icon="lock"
@@ -78,15 +78,13 @@ export default function Register() {
                     onChange={e => setPassword(e.target.value)}
                   />
                   <MDBInput
-                      label="Confirm your Password"
-                      icon="exclamation-triangle"
-                      group
-                      type="text"
-                      validate
-                      error="wrong"
-                      success="right"
-                      onChange={ e => setPasswordCheck(e.target.value)}
-                    />
+                    label="Confirm your Password"
+                    icon="lock"
+                    group
+                    type="password"
+                    validate
+                    onChange={e => setPasswordCheck(e.target.value)}
+                  />
 
                 </div>
                 <div className="text-center py-4 mt-3">

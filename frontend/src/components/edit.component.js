@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
+
+
 export default class EditTask extends Component {
   constructor(props) {
     super(props);
@@ -65,7 +68,7 @@ window.location = "/calender"
       <h3 className="font-weight-bold deep-purple-text" style={{fontFamily:"Courier"}}>Edit Your Task</h3>
       <form onSubmit={this.onSubmit}>
         <div className="form-group">
-          <label  className="deep-purple-text" style={{fontFamily:"Courier"}}>Material: </label>
+        <label  className="deep-purple-text" style={{fontFamily:"Courier"}}>Material: </label>
           <input style={{fontFamily:"Courier"}} placeholder="choose subject"
               type="text"
               required
@@ -75,7 +78,7 @@ window.location = "/calender"
               />
         </div>
         <div className="form-group">
-          <label  className="deep-purple-text" style={{fontFamily:"Courier"}}>Description: </label>
+        <label  className="deep-purple-text" style={{fontFamily:"Courier"}}>Description: </label>
           <input style={{fontFamily:"Courier"}} placeholder="your plan to this material"
               type="text"
               required
@@ -85,7 +88,7 @@ window.location = "/calender"
               />
         </div>
         <div className="form-group">
-          <label  className="deep-purple-text" style={{fontFamily:"Courier"}}>Duration (in minutes): </label>
+        <label  className="deep-purple-text" style={{fontFamily:"Courier"}}>Duration (in minutes): </label>
           <input style={{fontFamily:"Courier"}} placeholder="choose your time wisely"
               type="text"
               required
@@ -95,7 +98,7 @@ window.location = "/calender"
               />
         </div>
         <div className="form-group">
-          <input type="submit" value="EditTask" className="btn btn-primary btn btn-outline-#4a148c purple darken-4" />
+        <input type="submit" value="EditTask" className="btn btn-primary btn btn-outline-#4a148c purple darken-4" />
         </div>
       </form>
     </div>
